@@ -9,8 +9,13 @@
 <body>
     <p id="creationPointAmount">0 Creation Points</p>
     <button onclick="createCreationPoint()"id=createButton">Create</button>
-    <button onclick="buyCreationPointsPerClick()"id="perClickUpgrade">Create a Normal Creation (You currently have 1) Cost: 10 Creation Points </button>
+    <button onclick="buyCreationPointsPerClick()"id="perClickUpgrade">Create a Normal Creation (You currently have 0) (Cost: 10 Creation Points) </button>
     <br>
+    <p id="rebirthText">0 Rebirth Points</p>
+    <br>
+    <button onclick="rebirth()"id="rebirthButton">Reset everything and rebirth (Cost:10000 Creation Points)</button>
+    <button onclick="createMatter()"id="matterButton">Create Matter (Cost: 10 Normal Creations)</button>
+    <button onclick="buyRebirthCreation()"id=rebirthCreationButton>Create a Rebirth Creation (You currently have 0) (Cost: 1 Rebirth Point)</button>
     <button onclick="clearSave()">clear save (debug)</button>
     <script src="main.js" charset="utf-8" type="text/javascript"></script>
 </body>
