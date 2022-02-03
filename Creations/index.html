@@ -5,18 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creations</title>
+    <style>
+        body {
+            background-color: #000000;
+}
+.header {
+  padding: 20px;
+  text-align: center;
+  background: #444444;
+  color: white;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace
+}
+
+        p {
+            color:white;
+            font-family: verdana;
+            font-size: 20px;
+}
+    </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Creations</h1>
+        <p>An idle game where you have to think before you upgrade</p>
+    </div>
     <p id="creationPointAmount">0 Creation Points</p>
     <button onclick="createCreationPoint()"id=createButton">Create</button>
     <button onclick="buyCreationPointsPerClick()"id="perClickUpgrade">Create a Normal Creation (You currently have 0) (Cost: 10 Creation Points) </button>
     <br>
     <p id="rebirthText">0 Rebirth Points</p>
     <br>
+    <p id="matterText">0 Matter</p>
+    <br>
     <button onclick="rebirth()"id="rebirthButton">Reset everything and rebirth (Cost:10000 Creation Points)</button>
-    <button onclick="createMatter()"id="matterButton">Create Matter (Cost: 10 Normal Creations)</button>
-    <button onclick="buyRebirthCreation()"id=rebirthCreationButton>Create a Rebirth Creation (You currently have 0) (Cost: 1 Rebirth Point)</button>
-    <button onclick="clearSave()">clear save (debug)</button>
+    <button onclick="createMatter()"id="matterButton">Create Matter (Cost: 60 Creation Points per Click)</button>
+    <button onclick="buyRebirthCreation()"id=rebirthCreationButton>Create a Reborn Creation (You currently have 0) (Cost: 1 Rebirth Point)</button>
+    <button onclick="resetRebirthCreation()"id=rebirthCreationResetButton>Reset Rebirth Creation price (Cost: 5 Matter)</button>
+    <br>
+    <br>
+    <br>
+    <! ––These should always be at the bottom––>
+    <a href="https://discord.gg/QatTYE7VAw">Creations Discord Server</a>
+    <button onclick="clearSave()">clear save (refresh website after clicking to reset)</button>
     <script src="main.js" charset="utf-8" type="text/javascript"></script>
 </body>
 </html>
