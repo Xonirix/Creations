@@ -4,6 +4,19 @@ document.getElementById("rebirthCreationButton").style.display = "none"
 document.getElementById("rebirthText").style.display = "none"
 document.getElementById("rebirthCreationResetButton").style.display = "none"
 document.getElementById("matterText").style.display = "none"
+document.getElementById("ascensionText").style.display="none"
+document.getElementById("ascensionTitle").style.display="none"
+document.getElementById("rebirthTitle").style.display="none"
+document.getElementById("ascendedCreationButton").style.display="none"
+document.getElementById("energyCells").style.display="none"
+document.getElementById("ascensionText").style.display="none"
+document.getElementById("ascensionButton").style.display="none"
+document.getElementById("createEnergyCellButton").style.display="none"
+document.getElementById("creatorModuleUpgradeButton").style.display="none"
+document.getElementById("creatorBoosterModuleUpgradeButton").style.display="none"
+document.getElementById("normalCreationModuleUpgrade").style.display="none"
+document.getElementById("machineTitle").style.display="none"
+document.getElementById("resetMachineSetupButton").style.display="none"
 var gameData = {
     creationPoints: 0,
     creationPointsPerClick: 1,
@@ -14,7 +27,16 @@ var gameData = {
     rebirthAmount: 0,
     rebirthCreationCost: 1,
     matter: 0,
-    update: 1
+    ascensionAmount: 0,
+    ascensionPointAmount: 0,
+    energyCellAmount: 0,
+    creatorModuleAmount: 0,
+    creatorBoosterModuleAmount: 0,
+    normalCreationModuleAmount: 0,
+    rebirthPointsPerRebirth: 1,
+    ascensionCreationAmount: 0,
+    ascensionCreationCost: 1,
+    update: 2,
     //remember to do the update thingy everytime you add a new number
 }
 function buyCreationPointsPerClick(){
@@ -36,8 +58,10 @@ function rebirth() {
     gameData.creationPointsPerClick=1
     gameData.creationPointsPerClickCost=10
     gameData.normalCreationAmount=0
-    gameData.rebirthPoints+=1
+    gameData.rebirthPoints+=gameData.rebirthPointsPerRebirth
     gameData.rebirthAmount+=1
+    gameData.matterCreationCost=30
+    gameData.matterCreationCostMultiplier=1.5
     }
 }
 function buyRebirthCreation() {
@@ -51,8 +75,11 @@ function buyRebirthCreation() {
     
 }
 function createMatter() {
-    if(gameData.creationPointsPerClick>=60){
-        gameData.creationPointsPerClick-=60
+    if(gameData.creationPointsPerClick>=gameData.matterCreationCost){
+        gameData.creationPointsPerClick-=gameData.matterCreationCost
+        gameData.matterCreationCost*=gameData.matterCreationCostMultiplier
+        gameData.matterCreationCostMultiplier*=0.9
+        Math.round(gameData.matterCreationCost)
         gameData.matter+=1
     }
 }
@@ -62,7 +89,80 @@ function resetRebirthCreation() {
         gameData.rebirthCreationCost=1
     }
 }
+function ascend() {
+    if(gameData.creationPoints>=150000) {
+    gameData.creationPoints= 0
+    gameData.creationPointsPerClick= 1
+    gameData.creationPointsPerClickCost= 10
+    gameData.normalCreationAmount= 0
+    gameData.rebirthPoints= 0
+    gameData.rebirthCreationAmount= 0
+    gameData.rebirthCreationCost = 1
+    gameData.ascensionAmount+=1
+    gameData.ascensionPointAmount+=1
+    }
+}
+function createAscendedCreation() {
+    if(gameData.ascensionPointAmount>=gameData.ascensionCreationCost){
+        gameData.ascensionPointAmount-=gameData.ascensionCreationCost
+        gameData.rebirthPointsPerRebirth+=1
+        gameData.ascensionCreationAmount+=1
+        gameData.ascensionCreationCost*=1.5
+        gameData.ascensionCreationCost= Math.round(gameData.ascensionCreationCost)
+    }
+}
+function createEnergyCell() {
+    if(gameData.matter>=50) {
+        gameData.matter-=50
+        gameData.energyCellAmount+=1
+    }
+}
+function creatorModuleUpgrade() {
+    if(gameData.energyCellAmount>=1){
+        gameData.energyCellAmount-=1
+        gameData.creatorModuleAmount+=1
+    }
+}
+function creatorBoosterModuleUpgrade(){
+    if(gameData.energyCellAmount>=1){
+        gameData.energyCellAmount-=1
+        gameData.creatorBoosterModuleAmount+=1
+}}
+function normalCreationModuleUpgrade(){
+    if(gameData.energyCellAmount>=1){
+        if(gameData.normalCreationModuleAmount<50){
+    gameData.energyCellAmount-=1
+    gameData.normalCreationModuleAmount+=1}
+}}
+function resetMachineLayout(){
+    if(gameData.rebirthPoints>=10){
+        gameData.energyCellAmount+= gameData.creatorModuleAmount
+        gameData.energyCellAmount+= gameData.creatorBoosterModuleAmount
+        gameData.energyCellAmount+= gameData.normalCreationModuleAmount
+        gameData.creatorModuleAmount=0
+        gameData.creatorBoosterModuleAmount=0
+        gameData.normalCreationModuleAmount=0
+    }
+}
 var mainGameLoop=window.setInterval(function() {
+    if(gameData.ascensionAmount>=1){
+        document.getElementById("ascensionText").style.display="inline-block"
+document.getElementById("ascensionTitle").style.display="inline-block"
+document.getElementById("rebirthTitle").style.display="inline-block"
+document.getElementById("ascendedCreationButton").style.display="inline-block"
+document.getElementById("energyCells").style.display="inline-block"
+document.getElementById("ascensionText").style.display="inline-block"
+document.getElementById("ascensionButton").style.display="inline-block"
+document.getElementById("createEnergyCellButton").style.display="inline-block"
+document.getElementById("creatorModuleUpgradeButton").style.display="inline-block"
+document.getElementById("creatorBoosterModuleUpgradeButton").style.display="inline-block"
+document.getElementById("normalCreationModuleUpgrade").style.display="inline-block"
+document.getElementById("machineTitle").style.display="inline-block"
+document.getElementById("resetMachineSetupButton").style.display="inline-block"
+    }
+    if(gameData.creationPoints>=150000){
+        document.getElementById("ascensionButton").style.display="inline-block"
+    }
     if(gameData.creationPoints>=10000){
         document.getElementById("rebirthButton").style.display="inline-block"
     }
@@ -73,18 +173,61 @@ var mainGameLoop=window.setInterval(function() {
         document.getElementById("rebirthButton").style.display="inline-block"
         document.getElementById("rebirthCreationResetButton").style.display = "inline-block"
         document.getElementById("matterText").style.display = "inline-block"
+        document.getElementById("rebirthTitle").style.display="inline-block"
     }
-    document.getElementById("creationPointAmount").innerHTML = gameData.creationPoints + " Creation Points (Your current Creation Points per click:"+ gameData.creationPointsPerClick + ")"
+    document.getElementById("creationPointAmount").innerHTML = gameData.creationPoints + " Creation Points (Your current Creation Points per click: "+ gameData.creationPointsPerClick + ")"
     document.getElementById("perClickUpgrade").innerHTML="Create a Normal Creation (You currently have " + gameData.normalCreationAmount+ ") (Cost: " + gameData.creationPointsPerClickCost + "Creation Points)"
-    document.getElementById("rebirthText").innerHTML= gameData.rebirthPoints +" Rebirth Points"
+    document.getElementById("rebirthText").innerHTML= gameData.rebirthPoints +" Rebirth Points (Your current Rebirth Points per Rebirth: "+ gameData.rebirthPointsPerRebirth+ ")"
     document.getElementById("matterText").innerHTML= gameData.matter+ " Matter"
     document.getElementById("rebirthCreationButton").innerHTML = "Create a Reborn Creation (You currently have " + gameData.rebirthCreationAmount+ ") (Cost: " + gameData.rebirthCreationCost + " Rebirth Points)"
+    document.getElementById("ascensionText").innerHTML = gameData.ascensionPointAmount + " Ascension Points"
+    document.getElementById("energyCells").innerHTML = gameData.energyCellAmount + " Energy Cells"
+    document.getElementById("ascendedCreationButton").innerHTML = "Create an Ascended Creation (You currently have " + gameData.ascensionCreationAmount+ ") (Cost: "+gameData.ascensionCreationCost+")"
+    document.getElementById("creatorModuleUpgradeButton").innerHTML = "Automatic Creator Module (Energy Cell Amount: "+ gameData.creatorModuleAmount+ ")"
+    document.getElementById("creatorBoosterModuleUpgradeButton").innerHTML = "Manual Creator Booster Module (Energy Cell Amount: "+ gameData.creatorBoosterModuleAmount+ ")"
+    document.getElementById("normalCreationModuleUpgrade").innerHTML = "Normal Creation Creator Module (Energy Cell Amount: "+ gameData.normalCreationModuleAmount+ ")"
+    document.getElementById("matterButton").innerHTML = "Create Matter (Cost: "+gameData.matterCreationCost+" Creation Points per Click)"
+    if(gameData.matter<0){
+        gameData.matter=0
+    }
+    if(gameData.creationPointsPerClickCost<0){
+        gameData.creationPointsPerClickCost=0
+    }
+    if(gameData.matterCreationCostMultiplier<1.01) {
+        gameData.matterCreationCostMultiplier=1.01
+    }
 }, 100)
+var moduleLoop=window.setInterval(function() {
+    if(gameData.matter>=1){
+    if(gameData.normalCreationModuleAmount>=1) {
+        if(gameData.creationPointsPerClickCost>=30000){
+        gameData.creationPointsPerClickCost-=300*gameData.normalCreationModuleAmount
+        gameData.matter-=gameData.normalCreationModuleAmount}
+    }
+    if(gameData.creatorModuleAmount>=1){
+        gameData.creationPoints+=gameData.creationPointsPerClick*gameData.creatorModuleAmount
+        gameData.matter-=gameData.creatorModuleAmount
+    }}
+}, 15000)
+var boosterLoop=window.setInterval(function(){
+    if(gameData.creatorBoosterModuleAmount>=1) {
+
+        gameData.creationPointsPerClick+=100*gameData.creatorBoosterModuleAmount
+}}, 5000)
 var savegame = JSON.parse(localStorage.getItem("creationsSave"))
 if (savegame !== null){
     if(savegame.update !== gameData.update){
         if (typeof savegame.update == "undefined") savegame.update = gameData.update;
-        if (typeof savegame.rebirthCreationCost == "undefined") savegame.update = gameData.update;
+        if (typeof savegame.rebirthCreationCost == "undefined") savegame.rebirthCreationCost = gameData.rebirthCreationCost;
+        if (typeof savegame.ascensionAmount == "undefined") savegame.ascensionAmount = gameData.ascensionAmount;
+        if (typeof savegame.ascensionCreationAmount == "undefined") savegame.ascensionCreationAmount = gameData.ascensionCreationAmount;
+        if (typeof savegame.ascensionCreationCost == "undefined") savegame.ascensionCreationCost = gameData.ascensionCreationCost;
+        if (typeof savegame.rebirthPointsPerRebirth == "undefined") savegame.rebirthPointsPerRebirth = gameData.rebirthPointsPerRebirth;
+        if (typeof savegame.energyCellAmount == "undefined") savegame.energyCellAmount = gameData.energyCellAmount;
+        if (typeof savegame.creatorModuleAmount == "undefined") savegame.creatorModuleAmount = gameData.creatorModuleAmount;
+        if (typeof savegame.creatorBoosterModuleAmount == "undefined") savegame.creatorBoosterModuleAmount = gameData.creatorBoosterModuleAmount;
+        if (typeof savegame.normalCreationModuleAmount == "undefined") savegame.normalCreationModuleAmount = gameData.normalCreationModuleAmount;
+        if (typeof savegame.ascensionPointAmount == "undefined") savegame.ascensionPointAmount = gameData.ascensionPointAmount;
     }
     gameData=savegame
 }
@@ -93,4 +236,7 @@ var saveGameLoop = window.setInterval(function() {
 }, 15000)
 function clearSave() {
     localStorage.removeItem("creationsSave")
+}
+function fixCreationPointsPerClick(){
+    gameData.creationPointsPerClick = 1
 }

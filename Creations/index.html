@@ -26,6 +26,9 @@
 a{color:rgb(187, 187, 187);
             font-family: verdana;
             font-size: 15px;}
+h1{color:white;
+            font-family: verdana;
+            font-size: 25}
     </style>
 </head>
 <body>
@@ -37,14 +40,33 @@ a{color:rgb(187, 187, 187);
     <button onclick="createCreationPoint()"id=createButton">Create</button>
     <button onclick="buyCreationPointsPerClick()"id="perClickUpgrade">Create a Normal Creation (You currently have 0) (Cost: 10 Creation Points) </button>
     <br>
+    <h1 id=rebirthTitle>Rebirth</h1>
+    <br>
     <p id="rebirthText">0 Rebirth Points</p>
     <br>
     <p id="matterText">0 Matter</p>
     <br>
-    <button onclick="rebirth()"id="rebirthButton">Reset everything and rebirth (Cost:10000 Creation Points)</button>
+    <button onclick="rebirth()"id="rebirthButton">Reset everything and be Reborn (Required: 10000 Creation Points)</button>
     <button onclick="createMatter()"id="matterButton">Create Matter (Cost: 60 Creation Points per Click)</button>
-    <button onclick="buyRebirthCreation()"id=rebirthCreationButton>Create a Reborn Creation (You currently have 0) (Cost: 1 Rebirth Point)</button>
-    <button onclick="resetRebirthCreation()"id=rebirthCreationResetButton>Reset Rebirth Creation price (Cost: 5 Matter)</button>
+    <button onclick="buyRebirthCreation()"id="rebirthCreationButton">Create a Reborn Creation (You currently have 0) (Cost: 1 Rebirth Point)</button>
+    <button onclick="resetRebirthCreation()"id="rebirthCreationResetButton">Reset Rebirth Creation price (Cost: 5 Matter)</button>
+    <br>
+    <h1 id="ascensionTitle">Ascension</h1>
+    <br>
+    <p id="ascensionText">0 Ascension Points</p>
+    <br>
+    <p id="energyCells">0 Energy Cells</p>
+    <br>
+    <button onclick="ascend()"id="ascensionButton">Reset everything (other than matter) and Ascend (Requires: 150000 Creation Points)</button>
+    <button onclick="createAscendedCreation()"id="ascendedCreationButton">Create an Ascended Creation (You currently have 0) (Cost: 1 Ascension Point</button>
+    <button onclick="createEnergyCell()"id="createEnergyCellButton">Create an Energy Cell (cost: 50 matter)</button>
+    <br>
+    <p id="machineTitle">The Machine</p>
+    <br>
+    <button onclick="creatorModuleUpgrade()"id="creatorModuleUpgradeButton">Automatic Creator Module (Energy Cell amount: 0)</button>
+    <button onclick="creatorBoosterModuleUpgrade()"id="creatorBoosterModuleUpgradeButton">Manual Creator Booster Module (Energy Cell amount: 0)</button>
+    <button onclick="normalCreationModuleUpgrade()"id="normalCreationModuleUpgrade">Normal Creation Creator Module (Energy Cell amount: 0)</button>
+    <button onclick="resetMachineSetup()"id="resetMachineSetupButton">Reset Machine Setup (Cost: 10 Rebirth Points)</button>
     <br>
     <br>
     <br>
@@ -54,6 +76,7 @@ a{color:rgb(187, 187, 187);
     <a href="https://xonirix.github.io/CreationsHelp/">Creations Help Page</a>
     <br>
     <button onclick="clearSave()">clear save (refresh website after clicking to reset)</button>
+    <button onclick="fixCreationPointsPerClick()">Fix Creation Points per Click (use when stuck at 0)</button>
     <script src="main.js" charset="utf-8" type="text/javascript"></script>
 </body>
 </html>
