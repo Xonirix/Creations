@@ -207,8 +207,9 @@ var moduleLoop=window.setInterval(function() {
 }, 15000)
 var boosterLoop=window.setInterval(function(){
     if(gameData.creatorBoosterModuleAmount>=1) {
-
+        if(gameData.matter>=1){
         gameData.creationPointsPerClick+=100*gameData.creatorBoosterModuleAmount
+        gameData.matter-=gameData.creatorBoosterModuleAmount}
 }}, 5000)
 var savegame = JSON.parse(localStorage.getItem("creationsSave"))
 if (savegame !== null){
