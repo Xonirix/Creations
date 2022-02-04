@@ -75,11 +75,8 @@ function buyRebirthCreation() {
     
 }
 function createMatter() {
-    if(gameData.creationPointsPerClick>=gameData.matterCreationCost){
-        gameData.creationPointsPerClick-=gameData.matterCreationCost
-        gameData.matterCreationCost*=gameData.matterCreationCostMultiplier
-        gameData.matterCreationCostMultiplier*=0.9
-        Math.round(gameData.matterCreationCost)
+    if(gameData.creationPointsPerClick>=120){
+        gameData.creationPointsPerClick-=120
         gameData.matter+=1
     }
 }
@@ -186,7 +183,6 @@ document.getElementById("resetMachineSetupButton").style.display="inline-block"
     document.getElementById("creatorModuleUpgradeButton").innerHTML = "Automatic Creator Module (Energy Cell Amount: "+ gameData.creatorModuleAmount+ ")"
     document.getElementById("creatorBoosterModuleUpgradeButton").innerHTML = "Manual Creator Booster Module (Energy Cell Amount: "+ gameData.creatorBoosterModuleAmount+ ")"
     document.getElementById("normalCreationModuleUpgrade").innerHTML = "Normal Creation Creator Module (Energy Cell Amount: "+ gameData.normalCreationModuleAmount+ ")"
-    document.getElementById("matterButton").innerHTML = "Create Matter (Cost: "+gameData.matterCreationCost+" Creation Points per Click)"
     if(gameData.matter<0){
         gameData.matter=0
     }
