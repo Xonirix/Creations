@@ -1,4 +1,3 @@
-document.getElementById("rebirthButton").style.display = "none"
 document.getElementById("matterButton").style.display = "none"
 document.getElementById("rebirthCreationButton").style.display = "none"
 document.getElementById("rebirthText").style.display = "none"
@@ -17,6 +16,8 @@ document.getElementById("creatorBoosterModuleUpgradeButton").style.display="none
 document.getElementById("normalCreationModuleUpgrade").style.display="none"
 document.getElementById("machineTitle").style.display="none"
 document.getElementById("resetMachineSetupButton").style.display="none"
+document.getElementById("creationWarning").style.display="none"
+document.getElementById("machineWarning").style.display="none"
 var gameData = {
     creationPoints: 0,
     creationPointsPerClick: 1,
@@ -43,7 +44,7 @@ function buyCreationPointsPerClick(){
     if (gameData.creationPoints>= gameData.creationPointsPerClickCost){
         gameData.creationPoints-=gameData.creationPointsPerClickCost
         gameData.creationPointsPerClick*= 1.5
-        gameData.creationPointsPerClickCost*= 2.2
+        gameData.creationPointsPerClickCost*= 1.8
         gameData.creationPointsPerClick= Math.round(gameData.creationPointsPerClick)
         gameData.creationPointsPerClickCost= Math.round(gameData.creationPointsPerClickCost)
         gameData.normalCreationAmount+= 1
@@ -75,8 +76,8 @@ function buyRebirthCreation() {
     
 }
 function createMatter() {
-    if(gameData.creationPointsPerClick>=120){
-        gameData.creationPointsPerClick-=120
+    if(gameData.creationPointsPerClick>=60){
+        gameData.creationPointsPerClick-=60
         gameData.matter+=1
     }
 }
@@ -132,7 +133,7 @@ function normalCreationModuleUpgrade(){
     gameData.normalCreationModuleAmount+=1}
 }}
 function resetMachineLayout(){
-    if(gameData.rebirthPoints>=10){
+    if(gameData.rebirthPoints>=1){
         gameData.energyCellAmount+= gameData.creatorModuleAmount
         gameData.energyCellAmount+= gameData.creatorBoosterModuleAmount
         gameData.energyCellAmount+= gameData.normalCreationModuleAmount
@@ -156,8 +157,9 @@ document.getElementById("creatorBoosterModuleUpgradeButton").style.display="inli
 document.getElementById("normalCreationModuleUpgrade").style.display="inline-block"
 document.getElementById("machineTitle").style.display="inline-block"
 document.getElementById("resetMachineSetupButton").style.display="inline-block"
+document.getElementById("machineWarning").style.display="inline-block"
     }
-    if(gameData.creationPoints>=150000){
+    if(gameData.rebirthAmount>=1){
         document.getElementById("ascensionButton").style.display="inline-block"
     }
     if(gameData.creationPoints>=10000){
@@ -171,9 +173,10 @@ document.getElementById("resetMachineSetupButton").style.display="inline-block"
         document.getElementById("rebirthCreationResetButton").style.display = "inline-block"
         document.getElementById("matterText").style.display = "inline-block"
         document.getElementById("rebirthTitle").style.display="inline-block"
+        document.getElementById("creationWarning").style.display="inline-block"
     }
     document.getElementById("creationPointAmount").innerHTML = gameData.creationPoints + " Creation Points (Your current Creation Points per click: "+ gameData.creationPointsPerClick + ")"
-    document.getElementById("perClickUpgrade").innerHTML="Create a Normal Creation (You currently have " + gameData.normalCreationAmount+ ") (Cost: " + gameData.creationPointsPerClickCost + "Creation Points)"
+    document.getElementById("perClickUpgrade").innerHTML="Create a Normal Creation (You currently have " + gameData.normalCreationAmount+ ") (Cost: " + gameData.creationPointsPerClickCost + " Creation Points)"
     document.getElementById("rebirthText").innerHTML= gameData.rebirthPoints +" Rebirth Points (Your current Rebirth Points per Rebirth: "+ gameData.rebirthPointsPerRebirth+ ")"
     document.getElementById("matterText").innerHTML= gameData.matter+ " Matter"
     document.getElementById("rebirthCreationButton").innerHTML = "Create a Reborn Creation (You currently have " + gameData.rebirthCreationAmount+ ") (Cost: " + gameData.rebirthCreationCost + " Rebirth Points)"
@@ -199,17 +202,14 @@ var moduleLoop=window.setInterval(function() {
         if(gameData.creationPointsPerClickCost>=30000){
         gameData.creationPointsPerClickCost-=300*gameData.normalCreationModuleAmount
         gameData.matter-=gameData.normalCreationModuleAmount}
-    }
-    if(gameData.creatorModuleAmount>=1){
-        gameData.creationPoints+=gameData.creationPointsPerClick*gameData.creatorModuleAmount
-        gameData.matter-=gameData.creatorModuleAmount
     }}
-}, 15000)
-var boosterLoop=window.setInterval(function(){
     if(gameData.creatorBoosterModuleAmount>=1) {
-        if(gameData.matter>=1){
         gameData.creationPointsPerClick+=100*gameData.creatorBoosterModuleAmount
         gameData.matter-=gameData.creatorBoosterModuleAmount}
+}, 15000)
+var automaticCreatorLoop=window.setInterval(function(){
+    if(gameData.creatorModuleAmount>=1){
+        gameData.creationPoints+=gameData.creationPointsPerClick*gameData.creatorModuleAmount
 }}, 5000)
 var savegame = JSON.parse(localStorage.getItem("creationsSave"))
 if (savegame !== null){
@@ -236,4 +236,6 @@ function clearSave() {
 }
 function fixCreationPointsPerClick(){
     gameData.creationPointsPerClick = 1
+    gameData.creationPointsPerClickCost = 10
+    gameData.normalCreationAmount = 0
 }

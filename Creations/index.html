@@ -36,26 +36,28 @@ h1{color:white;
         <h1>Creations</h1>
         <p>An idle game where you have to think before you upgrade</p>
     </div>
-    <p id="creationPointAmount">0 Creation Points</p>
+    <div style="white-space: nowrap; max-width: 90vw; overflow-x: auto"> 
+        <p id="creationPointAmount">0 Creation Points</p> <p id="rebirthText">0 Rebirth Points</p> <p id="matterText">0 Matter</p> <p id="ascensionText">0 Ascension Points</p> <p id="energyCells">0 Energy Cells</p>  
+    </div>
     <button onclick="createCreationPoint()"id=createButton">Create</button>
     <button onclick="buyCreationPointsPerClick()"id="perClickUpgrade">Create a Normal Creation (You currently have 0) (Cost: 10 Creation Points) </button>
     <br>
     <h1 id=rebirthTitle>Rebirth</h1>
     <br>
-    <p id="rebirthText">0 Rebirth Points</p>
+    <p id="rebirthText">0 Rebirth Points</p> 
     <br>
-    <p id="matterText">0 Matter</p>
+    <p id="matterText">0 Matter</p> 
+    <br>
+    <p id="creationWarning">Warning: Most creations multiply only the current per click, which means that not only does the order you buy them in matter, it also means once the currency that they upgrade is reset, their boost will be too (and sometimes their cost will stay the same), keep this in mind."</p>
     <br>
     <button onclick="rebirth()"id="rebirthButton">Reset everything and be Reborn (Required: 10000 Creation Points)</button>
-    <button onclick="createMatter()"id="matterButton">Create Matter (Cost: 120 Creation Points per Click)</button>
+    <button onclick="createMatter()"id="matterButton">Create Matter (Cost: 60 Creation Points per Click)</button>
     <button onclick="buyRebirthCreation()"id="rebirthCreationButton">Create a Reborn Creation (You currently have 0) (Cost: 1 Rebirth Point)</button>
     <button onclick="resetRebirthCreation()"id="rebirthCreationResetButton">Reset Rebirth Creation price (Cost: 5 Matter)</button>
     <br>
     <h1 id="ascensionTitle">Ascension</h1>
     <br>
-    <p id="ascensionText">0 Ascension Points</p>
-    <br>
-    <p id="energyCells">0 Energy Cells</p>
+    <p id="ascensionText">0 Ascension Points</p> 
     <br>
     <button onclick="ascend()"id="ascensionButton">Reset everything (other than matter) and Ascend (Requires: 150000 Creation Points)</button>
     <button onclick="createAscendedCreation()"id="ascendedCreationButton">Create an Ascended Creation (You currently have 0) (Cost: 1 Ascension Point</button>
@@ -63,10 +65,14 @@ h1{color:white;
     <br>
     <p id="machineTitle">The Machine</p>
     <br>
+    <p id="energyCells">0 Energy Cells</p>
+    <br>
+    <p id="machineWarning">Warning: Every module takes 1 matter per energy cell it has every time it does it's thing, the only module that doesnt do this is the Automatic Creator.</p>
+    <br>
     <button onclick="creatorModuleUpgrade()"id="creatorModuleUpgradeButton">Automatic Creator Module (Energy Cell amount: 0)</button>
     <button onclick="creatorBoosterModuleUpgrade()"id="creatorBoosterModuleUpgradeButton">Manual Creator Booster Module (Energy Cell amount: 0)</button>
     <button onclick="normalCreationModuleUpgrade()"id="normalCreationModuleUpgrade">Normal Creation Creator Module (Energy Cell amount: 0)</button>
-    <button onclick="resetMachineSetup()"id="resetMachineSetupButton">Reset Machine Setup (Cost: 10 Rebirth Points)</button>
+    <button onclick="resetMachineSetup()"id="resetMachineSetupButton">Reset Machine Setup (Cost: 1 Rebirth Points)</button>
     <br>
     <br>
     <br>
@@ -76,7 +82,7 @@ h1{color:white;
     <a href="https://xonirix.github.io/CreationsHelp/">Creations Help Page</a>
     <br>
     <button onclick="clearSave()">clear save (refresh website after clicking to reset)</button>
-    <button onclick="fixCreationPointsPerClick()">Fix Creation Points per Click (use when stuck at 0)</button>
+    <button onclick="fixCreationPointsPerClick()">Reset Creation Points (use when stuck at 0 Creation Points per Click)</button>
     <script src="main.js" charset="utf-8" type="text/javascript"></script>
 </body>
 </html>
