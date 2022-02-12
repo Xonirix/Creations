@@ -18,7 +18,7 @@
   font-family: 'Courier New', Courier, monospace
 }
 
-        p {
+        p, span {
             color:white;
             font-family: verdana;
             font-size: 20px;
@@ -29,6 +29,10 @@ a{color:rgb(187, 187, 187);
 h1{color:white;
             font-family: verdana;
             font-size: 25}
+#textBox{white-space: nowrap;
+            max-width: 90vw;
+            overflow-x: auto}
+#textBox > span:not(:last-child){margin-right: 25px}
     </style>
 </head>
 <body>
@@ -36,17 +40,13 @@ h1{color:white;
         <h1>Creations</h1>
         <p>An idle game where you have to think before you upgrade</p>
     </div>
-    <div style="white-space: nowrap; max-width: 90vw; overflow-x: auto"> 
-        <p id="creationPointAmount">0 Creation Points</p> <p id="rebirthText">0 Rebirth Points</p> <p id="matterText">0 Matter</p> <p id="ascensionText">0 Ascension Points</p> <p id="energyCells">0 Energy Cells</p>  
+    <div id="textBox"> 
+        <span id="creationPointAmount">0 Creation Points</span> <span id="rebirthText">0 Rebirth Points</span> <span id="matterText">0 Matter</span> <span id="ascensionText">0 Ascension Points</span> <span id="energyCells">0 Energy Cells</span>  
     </div>
     <button onclick="createCreationPoint()"id=createButton">Create</button>
     <button onclick="buyCreationPointsPerClick()"id="perClickUpgrade">Create a Normal Creation (You currently have 0) (Cost: 10 Creation Points) </button>
     <br>
     <h1 id=rebirthTitle>Rebirth</h1>
-    <br>
-    <p id="rebirthText">0 Rebirth Points</p> 
-    <br>
-    <p id="matterText">0 Matter</p> 
     <br>
     <p id="creationWarning">Warning: Most creations multiply only the current per click, which means that not only does the order you buy them in matter, it also means once the currency that they upgrade is reset, their boost will be too (and sometimes their cost will stay the same), keep this in mind."</p>
     <br>
@@ -57,15 +57,11 @@ h1{color:white;
     <br>
     <h1 id="ascensionTitle">Ascension</h1>
     <br>
-    <p id="ascensionText">0 Ascension Points</p> 
-    <br>
     <button onclick="ascend()"id="ascensionButton">Reset everything (other than matter) and Ascend (Requires: 150000 Creation Points)</button>
     <button onclick="createAscendedCreation()"id="ascendedCreationButton">Create an Ascended Creation (You currently have 0) (Cost: 1 Ascension Point</button>
     <button onclick="createEnergyCell()"id="createEnergyCellButton">Create an Energy Cell (cost: 50 matter)</button>
     <br>
     <p id="machineTitle">The Machine</p>
-    <br>
-    <p id="energyCells">0 Energy Cells</p>
     <br>
     <p id="machineWarning">Warning: Every module takes 1 matter per energy cell it has every time it does it's thing, the only module that doesnt do this is the Automatic Creator.</p>
     <br>
